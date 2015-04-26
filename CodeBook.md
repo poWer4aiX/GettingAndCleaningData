@@ -43,6 +43,7 @@ The function makes use of the following files (relative to the extracted .zip ar
 * test/X_test.txt
 * test/y_test.txt
 * test/subject_test.txt
+
 (for a detailed description of the data format and content refer to the documentation at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
 In all cases the data are being read my read.table with a blank separator.
 
@@ -90,3 +91,4 @@ function. The columns in the data frames are aggregated by the mean function and
 data frame df.result. The the automatically added columns for the group by steps are renamed by reasonable names.
 
 Finally the df.result dataset is being returned by the function.
+
