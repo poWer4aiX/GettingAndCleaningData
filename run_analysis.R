@@ -1,5 +1,17 @@
-
 run_analysis <- function (path="UCI HAR Dataset") {
+# function which reads the files from the "UCI HAR Dataset", merges them, performs some aggregaroins
+# and filtering. See the codebook.md 
+#
+# Args:
+#	path: a character value which points to the path, where the extracted dataset can be found. This
+#		can either be an absolute or a relative path. If a relative path is being used, make sure that
+#		current working directory is the one you expect. The faufault is the relative path "UCI HAR Dataset".
+#
+# Returns:
+#	A data frame based on the original training and test data sets, reduced by the "std()" and "mean()" variables,
+#	grouped by the activity label and subject, agreegated by the mean of each variable (excluding the grouped by ones).
+#
+
 	#--- let's define some shortcuts to the source files of interest
 	path.actifity_lables <- "/activity_labels.txt"
 	path.features <- "/features.txt"
