@@ -1,5 +1,5 @@
 
-run_analysis(path="UCI HAR Dataset") <- {
+run_analysis <- function (path="UCI HAR Dataset") {
 	#--- let's define some shortcuts to the source files of interest
 	path.actifity_lables <- "/activity_labels.txt"
 	path.features <- "/features.txt"
@@ -32,7 +32,7 @@ run_analysis(path="UCI HAR Dataset") <- {
 
 	#--- generate activities by lookup
 	df.activity_lables <- read.table(paste(path, path.actifity_lables, sep=""))
-	all.activites <- df.activity_lables[df.activity$V1,2]
+	all.activities <- as.character(df.activity_lables[df.activity$V1,2])
 	
 	### Step 4: Appropriately labels the data set with descriptive variable names. 
 	colnames(df.meanAndStd)[1:nrow(df.features.stdAndMean)] <-	as.character(df.features.stdAndMean$V2)
@@ -41,12 +41,13 @@ run_analysis(path="UCI HAR Dataset") <- {
 	### average of each variable for each activity and each subject.
 	df.train_subject <- read.table(paste(path, path.subject_train, sep=""))
 	df.test_subject <- read.table(paste(path, path.subject_test, sep=""))
-	df.all.subject <- rbind(df.train_subject, df.test_subject)
+	all.subject <- rbind(df.train_subject, df.test_subject)[,1]
 
-	#--- crete new df with activity and subject attached to
 	#--- group by
-	df.new <- df.meanAndStd
-	avg (v1...n) grooup by sctivity, subject
-
-
+	df.result <- aggregate(df.meanAndStd, by=list(all.activities,all.subject), FUN=mean, na.rm=TRUE)
+	colnames(df.result)[1] <- "activity"
+	colnames(df.result)[2] <- "subject"
+	
+	# return the result
+	df.result
 }
